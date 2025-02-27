@@ -12,14 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 
 public class AddressBookController {
     @Autowired
     private IAddressBookService addressBookService;
-    @RequestMapping("/")
+    @RequestMapping("/addressbook")
     public ResponseEntity<ResponseDTO> getaddressbook(){
         List<AddressBookData> addData=null;
         addData=addressBookService.getAddressBookData();
@@ -41,9 +41,9 @@ public class AddressBookController {
         return new ResponseEntity<ResponseDTO>(respDto, HttpStatus.OK);
     }
     @PutMapping("/update")
-    public ResponseEntity<ResponseDTO> updateaddressbook(@RequestBody AddressBookDTO addressBookDTO) {
+    public ResponseEntity<ResponseDTO> updateaddressbook(@PathVariable("id")int id,@RequestBody AddressBookDTO addressBookDTO) {
         AddressBookData addData = null;
-        addData = addressBookService.updateAddressBookData(addressBookDTO);
+        addData = addressBookService.updateAddressBookData(id,addressBookDTO);
         ResponseDTO respDto = new ResponseDTO("Successfull", addData);
         return new ResponseEntity<ResponseDTO>(respDto, HttpStatus.OK);
     }
