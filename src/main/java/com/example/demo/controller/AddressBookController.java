@@ -5,6 +5,7 @@ import com.example.demo.DTO.ResponseDTO;
 import com.example.demo.Service.IAddressBookService;
 import com.example.demo.model.AddressBookData;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
@@ -36,7 +37,7 @@ public class AddressBookController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> createAddressBook(@RequestBody AddressBookDTO addressBookDTO) {
+    public ResponseEntity<ResponseDTO> createAddressBook(@Valid @RequestBody AddressBookDTO addressBookDTO) {
         AddressBookData addData = addressBookService.createAddressBookData(addressBookDTO);
         ResponseDTO respDto = new ResponseDTO("Successful", addData);
         return new ResponseEntity<>(respDto, HttpStatus.CREATED);
