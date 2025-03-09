@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.DTO.AddressBookDTO;
+import com.example.demo.Exceptions.AddressBookException;
 import com.example.demo.model.AddressBookData;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,8 @@ public class AddressBookService implements IAddressBookService {
 
     // GET contact by ID
     public AddressBookData getAddressBookDataById(int id) {
-        if (id <= 0 || id > addDataList.size()) {
-            throw new RuntimeException("Invalid ID: " + id);
-        }
-        return addDataList.get(id - 1);
+        return addDataList.stream().filter(addressBookData -> addressBookData.getIdNo()==id).findFirst().orElseThrow(()->new AddressBookException("Address Not Found"));
+
     }
 
     // CREATE new contact
