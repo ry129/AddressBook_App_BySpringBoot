@@ -9,45 +9,68 @@ public class AddressBookData {
     private long phnNumber;
     private String city;
 
-    public AddressBookData(){}
-    public AddressBookData(int idNo, AddressBookDTO addressBookDTO){
-        this.idNo=idNo;
-        this.name=addressBookDTO.name;
-        this.address=addressBookDTO.address;
-        this.phnNumber=addressBookDTO.phnNumber;
-        this.city=addressBookDTO.city;
+    // Default Constructor
+    public AddressBookData() {}
+
+    // Parameterized Constructor using DTO
+    public AddressBookData(int idNo, AddressBookDTO addressBookDTO) {
+        this.idNo = idNo;
+        this.name = addressBookDTO.getName();
+        this.address = addressBookDTO.getAddress();
+        this.phnNumber = addressBookDTO.getPhnNumber();
+        this.city = addressBookDTO.getCity();
     }
-    public int getIdNo(){
+
+    // Getters & Setters
+    public int getIdNo() {
         return idNo;
     }
-    public void setIdNo(int idNo){
-        this.idNo=idNo;
+
+    public void setIdNo(int idNo) {
+        this.idNo = idNo;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public void setName(String name){
-        this.name=name;
+
+    public void setName(String name) {
+        this.name = name;
     }
-    public String getAddress(){
+
+    public String getAddress() {
         return address;
     }
-    public void setAddress(String address){
-        this.address=address;
+
+    public void setAddress(String address) {
+        this.address = address;
     }
-    public long getPhnNumber(){
+
+    public long getPhnNumber() {
         return phnNumber;
     }
-    public void setPhnNumber(long phnNumber){
-        this.phnNumber=phnNumber;
+
+    public void setPhnNumber(long phnNumber) {
+        this.phnNumber = phnNumber;
     }
-    public String getCity(){
+
+    public String getCity() {
         return city;
     }
-    public void setCity(String city){
-        this.city=city;
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
-
-
+    // Overriding toString() for debugging
+    @Override
+    public String toString() {
+        return "AddressBookData{" +
+                "idNo=" + idNo +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phnNumber=" + phnNumber +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

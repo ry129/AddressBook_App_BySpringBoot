@@ -6,34 +6,49 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 @Service
-public class AddressBookService implements IAddressBookService{
-     private List<AddressBookData> addDataList=new ArrayList<>();
+public class AddressBookService implements IAddressBookService {
 
-    public List<AddressBookData> getAddressBookData(){
+    private List<AddressBookData> addDataList = new ArrayList<>();
+
+    // GET all contacts
+    public List<AddressBookData> getAddressBookData() {
         return addDataList;
+    }
 
+    // GET contact by ID
+    public AddressBookData getAddressBookDataById(int id) {
+        if (id <= 0 || id > addDataList.size()) {
+            throw new RuntimeException("Invalid ID: " + id);
+        }
+        return addDataList.get(id - 1);
     }
-    public AddressBookData getAddressBookDataById(int id){
-        return addDataList.get(id-1);
-    }
-    public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO){
-        AddressBookData addData=null;
-        addData=new AddressBookData(addDataList.size()+1,addressBookDTO);
-        return addData;
 
-    }
-    public AddressBookData updateAddressBookData(int id,AddressBookDTO addressBookDTO){
-        AddressBookData addData=this.getAddressBookDataById(id);
-        addData.setName(addressBookDTO.name);
-        addData.setAddress(addressBookDTO.address);
-        addData.setPhnNumber(addressBookDTO.phnNumber);
-        addData.setCity(addressBookDTO.city);
-        addDataList.set(id-1,addData);
+    // CREATE new contact
+    public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
+        AddressBookData addData = new AddressBookData(addDataList.size() + 1, addressBookDTO);
+        addDataList.add(addData); // Fix: Add to list
         return addData;
     }
-    public void deleteAddressBookData(int id){
-        addDataList.remove(id-1);
+
+    // UPDATE contact
+    public AddressBookData updateAddressBookData(int id, AddressBookDTO addressBookDTO) {
+        AddressBookData addData = this.getAddressBookDataById(id);
+        addData.setName(addressBookDTO.getName());
+        addData.setAddress(addressBookDTO.getAddress());
+        addData.setPhnNumber(addressBookDTO.getPhnNumber());
+        addData.setCity(addressBookDTO.getCity());
+        addDataList.set(id - 1, addData);
+        return addData;
     }
 
+    // DELETE contact
+    public void deleteAddressBookData(int id) {
+        if (id <= 0 || id > addDataList.size()) {
+            throw new RuntimeException("Invalid ID: " + id);
+        }
+        addDataList.remove(id - 1);
+    }
 }
