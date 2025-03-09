@@ -1,6 +1,8 @@
 package com.example.demo.DTO;
 
-public class ResponseDTO {
+import lombok.Data;
+
+public @Data class ResponseDTO {
     public String message;
     public Object data;
     public ResponseDTO(String message, Object data){
