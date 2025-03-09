@@ -1,6 +1,11 @@
 package com.example.demo.DTO;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
 public class AddressBookDTO {
+    @NotNull(message="Name cannot be null")
+    @Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee name Invalid")
     private String name;
     private String address;
     private long phnNumber;
